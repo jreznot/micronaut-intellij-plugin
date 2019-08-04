@@ -1,0 +1,17 @@
+<idea-plugin>
+    <id>org.strangeway.micronaut-intellij-plugin</id>
+    <name>Micronaut Framework Support</name>
+    <vendor email="micronaut@strangeway.org" url="http://strangeway.org">StrangeWay.Org</vendor>
+
+    <description><![CDATA[
+    Provides support for Micronaut Framework in Java and Kotlin
+    ]]></description>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <implicitUsageProvider implementation="org.strangeway.micronaut.MicronautImplicitUsageProvider"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
