@@ -15,7 +15,7 @@ dependencies {
 }
 
 intellij {
-    version '2019.2'
+    version '2019.1'
 }
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
@@ -25,6 +25,6 @@ compileTestKotlin {
 }
 patchPluginXml {
     changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+      Implemented support for basic features of Micronaut framework.
+      """
 }
