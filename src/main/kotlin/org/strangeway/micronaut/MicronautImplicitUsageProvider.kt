@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMethod
 import com.intellij.psi.PsiModifier
 
-// Example #1 : Implicit entry points of the framework
+// Example #2 : Implicit entry points of the framework
 class MicronautImplicitUsageProvider : ImplicitUsageProvider {
     override fun isImplicitWrite(element: PsiElement?): Boolean {
         return false
