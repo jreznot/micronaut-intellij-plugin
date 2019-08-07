@@ -5,7 +5,6 @@ import com.intellij.compiler.CompilerConfigurationImpl
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.StartupActivity
-import com.intellij.openapi.startup.StartupManager
 import com.intellij.openapi.ui.MessageType
 import com.intellij.openapi.ui.popup.Balloon
 import com.intellij.openapi.ui.popup.JBPopupFactory
@@ -18,20 +17,18 @@ import javax.swing.event.HyperlinkEvent
 // Example #1 : Check configuration and show notification on project start
 class CheckAnnotationProcessorsStartupActivity : StartupActivity {
     override fun runActivity(project: Project) {
-        StartupManager.getInstance(project).runWhenProjectIsInitialized {
-            DumbService.getInstance(project).runWhenSmart {
-                // after initial indexing
+        DumbService.getInstance(project).runWhenSmart {
+            // after initial indexing
 
-                val javaPsiFacade = JavaPsiFacade.getInstance(project)
-                val projectScope = GlobalSearchScope.allScope(project)
+            val javaPsiFacade = JavaPsiFacade.getInstance(project)
+            val projectScope = GlobalSearchScope.allScope(project)
 
-                if (javaPsiFacade.findClass(APPLICATION_CLASS, projectScope) != null) {
-                    // Yey! we have Micronaut in classpath
+            if (javaPsiFacade.findClass(APPLICATION_CLASS, projectScope) != null) {
+                // Yey! we have Micronaut in classpath
 
-                    val compilerConfiguration = getCompilerConfiguration(project)
-                    if (!compilerConfiguration.defaultProcessorProfile.isEnabled) {
-                        suggestEnableAnnotations(project)
-                    }
+                val compilerConfiguration = getCompilerConfiguration(project)
+                if (!compilerConfiguration.defaultProcessorProfile.isEnabled) {
+                    suggestEnableAnnotations(project)
                 }
             }
         }
