@@ -13,6 +13,14 @@
         <postStartupActivity implementation="org.strangeway.micronaut.CheckAnnotationProcessorsStartupActivity"/>
 
         <implicitUsageProvider implementation="org.strangeway.micronaut.MicronautImplicitUsageProvider"/>
+
+        <localInspection language="JAVA"
+                         displayName="@Scheduled bean inspection"
+                         groupName="Micronaut"
+                         implementationClass="org.strangeway.micronaut.MicronautScheduledInspection"/>
+
+        <codeInsight.lineMarkerProvider language="JAVA"
+                                        implementationClass="org.strangeway.micronaut.MicronautLineIconProvider"/>
     </extensions>
 
     <actions>
