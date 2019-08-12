@@ -16,11 +16,14 @@
 
 package org.strangeway.micronaut
 
-import com.intellij.psi.PsiReferenceContributor
-import com.intellij.psi.PsiReferenceRegistrar
+import com.intellij.openapi.util.IconLoader
 
-class MicronautScheduledReferenceContributor : PsiReferenceContributor() {
-    override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
-        // todo
-    }
+object MicronautIcons {
+    var ALARM = IconLoader.getIcon("/icons/alarm.svg")
+    var BEAN = IconLoader.getIcon("/icons/bean.svg")
+    var CONTROLLER = IconLoader.getIcon("/icons/controller.svg")
+    var DATABASE = IconLoader.getIcon("/icons/database.svg")
+    var EVENT = IconLoader.getIcon("/icons/event.svg")
+    var RECEIVER = IconLoader.getIcon("/icons/receiver.svg")
+    var SENDER = IconLoader.getIcon("/icons/sender.svg")
 }

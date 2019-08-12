@@ -20,7 +20,10 @@
                          implementationClass="org.strangeway.micronaut.MicronautScheduledInspection"/>
 
         <codeInsight.lineMarkerProvider language="JAVA"
-                                        implementationClass="org.strangeway.micronaut.MicronautLineIconProvider"/>
+                                        implementationClass="org.strangeway.micronaut.MicronautLineMarkerProvider"/>
+
+        <psi.referenceContributor language="JAVA"
+                                  implementation="org.strangeway.micronaut.MicronautScheduledReferenceContributor"/>
     </extensions>
 
     <actions>
