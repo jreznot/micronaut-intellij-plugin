@@ -16,12 +16,23 @@
 
 package org.strangeway.micronaut
 
-import com.intellij.psi.PsiReferenceContributor
-import com.intellij.psi.PsiReferenceRegistrar
+// Example #7: JAM Secret Weapon
+class MicronautHttpModel {
 
-// Example #5: Reference to bean from String literal
-class MicronautScheduledReferenceContributor : PsiReferenceContributor() {
-    override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
-        // todo
-    }
 }
+
+// todo tool window
+
+class MnController {
+
+}
+
+abstract class MnHttpMethodMapping {
+
+}
+
+abstract class MnGet : MnHttpMethodMapping()
+abstract class MnPost : MnHttpMethodMapping()
+abstract class MnPut : MnHttpMethodMapping()
+abstract class MnDelete : MnHttpMethodMapping()
+abstract class MnPatch : MnHttpMethodMapping()

@@ -19,6 +19,11 @@
                          groupName="Micronaut"
                          implementationClass="org.strangeway.micronaut.MicronautScheduledInspection"/>
 
+        <localInspection language="UAST"
+                         displayName="@Inject field inspection"
+                         groupName="Micronaut"
+                         implementationClass="org.strangeway.micronaut.MicronautFieldInjectionInspection"/>
+
         <codeInsight.lineMarkerProvider language="JAVA"
                                         implementationClass="org.strangeway.micronaut.MicronautLineMarkerProvider"/>
 

@@ -16,12 +16,15 @@
 
 package org.strangeway.micronaut
 
-import com.intellij.psi.PsiReferenceContributor
-import com.intellij.psi.PsiReferenceRegistrar
+import com.intellij.codeInspection.AbstractBaseUastLocalInspectionTool
+import com.intellij.codeInspection.InspectionManager
+import com.intellij.codeInspection.ProblemDescriptor
+import org.jetbrains.uast.UField
 
-// Example #5: Reference to bean from String literal
-class MicronautScheduledReferenceContributor : PsiReferenceContributor() {
-    override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
+// Example #4: UAST inspection for Java/Kotlin/etc
+class MicronautFieldInjectionInspection : AbstractBaseUastLocalInspectionTool(UField::class.java) {
+    override fun checkField(field: UField, manager: InspectionManager, isOnTheFly: Boolean): Array<ProblemDescriptor>? {
         // todo
+        return super.checkField(field, manager, isOnTheFly)
     }
 }

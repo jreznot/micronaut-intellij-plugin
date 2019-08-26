@@ -8,8 +8,8 @@ Here you can find the following examples:
 - Implicit usage provider
 - Inspection
 - UAST Inspection
-- Reference contributor
 - Line marker provider
+- Reference contributor
 - Language injection
 
 All the features are implemented for Micronaut Framework.
