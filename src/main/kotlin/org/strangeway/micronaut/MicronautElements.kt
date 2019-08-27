@@ -21,6 +21,8 @@ const val APPLICATION_CLASS = "io.micronaut.runtime.Micronaut"
 const val CONTROLLER_CLASS = "io.micronaut.http.annotation.Controller"
 const val SINGLETON_CLASS = "javax.inject.Singleton"
 
+const val INJECT = "javax.annotation.Inject"
+
 val BEAN_ANNOTATIONS = listOf(CONTROLLER_CLASS, SINGLETON_CLASS)
 
 const val HEAD_METHOD = "io.micronaut.http.annotation.Head"
@@ -33,6 +35,7 @@ const val PATCH_METHOD = "io.micronaut.http.annotation.Patch"
 const val ERROR_METHOD = "io.micronaut.http.annotation.Error"
 
 const val SCHEDULED_METHOD = "io.micronaut.scheduling.annotation.Scheduled"
+const val SCHEDULED_CRON_ATTRIBUTE = "cron"
 
 val METHOD_ANNOTATIONS = listOf(
     HEAD_METHOD, GET_METHOD, POST_METHOD, DELETE_METHOD, PUT_METHOD, PATCH_METHOD,

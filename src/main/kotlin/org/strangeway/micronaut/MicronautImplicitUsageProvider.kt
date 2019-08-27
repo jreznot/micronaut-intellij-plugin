@@ -18,15 +18,13 @@ package org.strangeway.micronaut
 
 import com.intellij.codeInsight.AnnotationUtil
 import com.intellij.codeInsight.daemon.ImplicitUsageProvider
-import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiMethod
-import com.intellij.psi.PsiModifier
+import com.intellij.psi.*
 
 // Example #2 : Implicit entry points of the framework
 class MicronautImplicitUsageProvider : ImplicitUsageProvider {
     override fun isImplicitWrite(element: PsiElement?): Boolean {
-        return false
+        return element is PsiField
+                && AnnotationUtil.isAnnotated(element, INJECT, 0)
     }
 
     override fun isImplicitRead(element: PsiElement?): Boolean {

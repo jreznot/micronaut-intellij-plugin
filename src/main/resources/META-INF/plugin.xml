@@ -17,11 +17,13 @@
         <localInspection language="JAVA"
                          displayName="@Scheduled bean inspection"
                          groupName="Micronaut"
+                         enabledByDefault="true"
                          implementationClass="org.strangeway.micronaut.MicronautScheduledInspection"/>
 
         <localInspection language="UAST"
                          displayName="@Inject field inspection"
                          groupName="Micronaut"
+                         enabledByDefault="true"
                          implementationClass="org.strangeway.micronaut.MicronautFieldInjectionInspection"/>
 
         <codeInsight.lineMarkerProvider language="JAVA"
