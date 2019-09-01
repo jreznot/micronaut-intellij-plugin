@@ -19,12 +19,12 @@ package org.strangeway.micronaut
 import com.cronutils.model.CronType
 import com.cronutils.model.definition.CronDefinitionBuilder.instanceDefinitionFor
 import com.cronutils.parser.CronParser
-import com.intellij.codeInspection.AbstractBaseJavaLocalInspectionTool
-import com.intellij.codeInspection.InspectionManager
-import com.intellij.codeInspection.ProblemDescriptor
-import com.intellij.codeInspection.ProblemHighlightType
+import com.intellij.codeInsight.AnnotationUtil
+import com.intellij.codeInspection.*
 import com.intellij.lang.jvm.annotation.JvmAnnotationConstantValue
-import com.intellij.psi.PsiMethod
+import com.intellij.openapi.command.WriteCommandAction
+import com.intellij.openapi.project.Project
+import com.intellij.psi.*
 
 // Example #3 : Inspection
 class MicronautScheduledInspection : AbstractBaseJavaLocalInspectionTool() {
@@ -36,6 +36,9 @@ class MicronautScheduledInspection : AbstractBaseJavaLocalInspectionTool() {
     ): Array<ProblemDescriptor>? {
         val annotation = method.getAnnotation(SCHEDULED_METHOD)
         if (annotation != null) {
+            val containingFile = method.containingFile
+            val problemsHolder = ProblemsHolder(manager, containingFile, isOnTheFly)
+
             val value = annotation.attributes
                 .find { a -> a.attributeName == SCHEDULED_CRON_ATTRIBUTE }
                 .let { it?.attributeValue as JvmAnnotationConstantValue? }
@@ -44,13 +47,24 @@ class MicronautScheduledInspection : AbstractBaseJavaLocalInspectionTool() {
             if (source != null) {
                 val cronValue = value.constantValue as String
                 if (!isValidCronExpression(cronValue)) {
-                    return arrayOf(
-                        manager.createProblemDescriptor(
-                            source, "Incorrect CRON expression", isOnTheFly, null, ProblemHighlightType.GENERIC_ERROR
-                        )
+                    problemsHolder.registerProblem(
+                        source, "Incorrect CRON expression", ProblemHighlightType.GENERIC_ERROR
                     )
                 }
             }
+            
+            val containingClass = method.containingClass
+            if (containingClass != null
+                && !AnnotationUtil.isAnnotated(containingClass, SINGLETON_CLASS, 0)) {
+
+                val nameElement = annotation.nameReferenceElement
+                if (nameElement != null) {
+                    problemsHolder.registerProblem(nameElement, "@Scheduled can be used only inside @Singleton",
+                        AddAnnotationFix(SINGLETON_CLASS, containingClass)) // or Use IntelliJ fix instead
+                }
+            }
+            
+            return problemsHolder.resultsArray
         }
 
         return ProblemDescriptor.EMPTY_ARRAY
@@ -66,5 +80,24 @@ class MicronautScheduledInspection : AbstractBaseJavaLocalInspectionTool() {
             return false
         }
         return true
+    }
+
+    class AddAnnotationFix(private val fqn: String, psiClass : PsiClass) : LocalQuickFixOnPsiElement(psiClass) {
+        override fun getFamilyName(): String {
+            return "Annotate class with @Singleton"
+        }
+
+        override fun getText(): String {
+            return familyName
+        }
+
+        override fun invoke(project: Project, file: PsiFile, startElement: PsiElement, endElement: PsiElement) {
+            val psiClass = startElement as PsiModifierListOwner
+            val containingFile = psiClass.containingFile
+
+            WriteCommandAction.runWriteCommandAction(project, "Annotate class with @Singleton", null, Runnable {
+                psiClass.modifierList?.addAnnotation(fqn)
+            }, containingFile)
+        }
     }
 }
