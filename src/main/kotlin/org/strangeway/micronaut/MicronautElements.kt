@@ -21,7 +21,7 @@ const val APPLICATION_CLASS = "io.micronaut.runtime.Micronaut"
 const val CONTROLLER_CLASS = "io.micronaut.http.annotation.Controller"
 const val SINGLETON_CLASS = "javax.inject.Singleton"
 
-const val INJECT = "javax.annotation.Inject"
+const val INJECT = "javax.inject.Inject"
 
 val BEAN_ANNOTATIONS = listOf(CONTROLLER_CLASS, SINGLETON_CLASS)
 
