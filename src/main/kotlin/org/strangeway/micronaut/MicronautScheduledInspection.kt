@@ -73,7 +73,7 @@ class MicronautScheduledInspection : AbstractBaseJavaLocalInspectionTool() {
     private fun isValidCronExpression(cron: String): Boolean {
         if (cron == "") return true
 
-        val cronParser = CronParser(instanceDefinitionFor(CronType.UNIX))
+        val cronParser = CronParser(instanceDefinitionFor(CronType.QUARTZ))
         try {
             cronParser.parse(cron)
         } catch (iae: IllegalArgumentException) {
