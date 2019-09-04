@@ -83,13 +83,9 @@ class MicronautScheduledInspection : AbstractBaseJavaLocalInspectionTool() {
     }
 
     class AddAnnotationFix(private val fqn: String, psiClass : PsiClass) : LocalQuickFixOnPsiElement(psiClass) {
-        override fun getFamilyName(): String {
-            return "Annotate class with @Singleton"
-        }
+        override fun getFamilyName(): String = "Annotate class with @Singleton"
 
-        override fun getText(): String {
-            return familyName
-        }
+        override fun getText(): String = familyName
 
         override fun invoke(project: Project, file: PsiFile, startElement: PsiElement, endElement: PsiElement) {
             val psiClass = startElement as PsiModifierListOwner
