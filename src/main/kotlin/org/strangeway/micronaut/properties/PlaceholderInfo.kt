@@ -14,14 +14,6 @@
  *  limitations under the License.
  */
 
-package org.strangeway.micronaut
+package org.strangeway.micronaut.properties
 
-import com.intellij.psi.PsiReferenceContributor
-import com.intellij.psi.PsiReferenceRegistrar
-
-// Example #5: Reference to bean from String literal
-class MicronautScheduledReferenceContributor : PsiReferenceContributor() {
-    override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
-        // todo
-    }
-}
+class PlaceholderInfo(val text: String)

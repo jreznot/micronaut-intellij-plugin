@@ -1,9 +1,9 @@
 plugins {
     id 'org.jetbrains.intellij' version '0.4.9'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.41'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.50'
 }
 
-group 'org.strangeway'
+group 'org.strangeway.ide'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -17,7 +17,10 @@ dependencies {
 
 intellij {
     version '2019.1'
+
+    plugins = ['properties']
 }
+
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }

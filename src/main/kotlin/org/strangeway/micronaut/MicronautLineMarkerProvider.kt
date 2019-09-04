@@ -21,7 +21,7 @@ import com.intellij.codeInsight.daemon.LineMarkerProvider
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiIdentifier
 
-// Example #6: Custom navigation
+// Example #5: Custom navigation
 class MicronautLineMarkerProvider : LineMarkerProvider {
     override fun getLineMarkerInfo(element: PsiElement): LineMarkerInfo<*>? {
         if (element is PsiIdentifier) {

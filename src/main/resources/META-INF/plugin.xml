@@ -8,6 +8,7 @@
     ]]></description>
 
     <depends>com.intellij.modules.java</depends>
+    <depends>com.intellij.properties</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity implementation="org.strangeway.micronaut.CheckAnnotationProcessorsStartupActivity"/>
@@ -30,7 +31,7 @@
                                         implementationClass="org.strangeway.micronaut.MicronautLineMarkerProvider"/>
 
         <psi.referenceContributor language="JAVA"
-                                  implementation="org.strangeway.micronaut.MicronautScheduledReferenceContributor"/>
+                                  implementation="org.strangeway.micronaut.MicronautPropertyReferenceContributor"/>
     </extensions>
 
     <actions>
