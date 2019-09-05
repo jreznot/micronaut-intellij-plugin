@@ -1,7 +1,7 @@
 <idea-plugin>
-    <id>org.strangeway.micronaut-intellij-plugin</id>
+    <id>org.jetbrains.micronaut-intellij-plugin</id>
     <name>Micronaut Framework Support</name>
-    <vendor email="micronaut@strangeway.org" url="http://strangeway.org">StrangeWay.Org</vendor>
+    <vendor>JetBrains</vendor>
 
     <description><![CDATA[
     Provides support for Micronaut Framework in Java and Kotlin
