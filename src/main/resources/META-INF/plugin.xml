@@ -11,27 +11,27 @@
     <depends>com.intellij.properties</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <postStartupActivity implementation="org.strangeway.micronaut.CheckAnnotationProcessorsStartupActivity"/>
+        <postStartupActivity implementation="org.jetbrains.micronaut.CheckAnnotationProcessorsStartupActivity"/>
 
-        <implicitUsageProvider implementation="org.strangeway.micronaut.MicronautImplicitUsageProvider"/>
+        <implicitUsageProvider implementation="org.jetbrains.micronaut.MicronautImplicitUsageProvider"/>
 
         <localInspection language="JAVA"
                          displayName="@Scheduled bean inspection"
                          groupName="Micronaut"
                          enabledByDefault="true"
-                         implementationClass="org.strangeway.micronaut.MicronautScheduledInspection"/>
+                         implementationClass="org.jetbrains.micronaut.MicronautScheduledInspection"/>
 
         <localInspection language="UAST"
                          displayName="@Inject field inspection"
                          groupName="Micronaut"
                          enabledByDefault="true"
-                         implementationClass="org.strangeway.micronaut.MicronautFieldInjectionInspection"/>
+                         implementationClass="org.jetbrains.micronaut.MicronautFieldInjectionInspection"/>
 
         <codeInsight.lineMarkerProvider language="JAVA"
-                                        implementationClass="org.strangeway.micronaut.MicronautLineMarkerProvider"/>
+                                        implementationClass="org.jetbrains.micronaut.MicronautLineMarkerProvider"/>
 
         <psi.referenceContributor language="JAVA"
-                                  implementation="org.strangeway.micronaut.MicronautPropertyReferenceContributor"/>
+                                  implementation="org.jetbrains.micronaut.MicronautPropertyReferenceContributor"/>
     </extensions>
 
     <actions>

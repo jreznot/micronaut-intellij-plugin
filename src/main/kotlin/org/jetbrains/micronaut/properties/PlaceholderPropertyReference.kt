@@ -1,20 +1,4 @@
-/*
- *  Copyright (c) 2008-2016 StrangeWayOrg.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
-package org.strangeway.micronaut.properties
+package org.jetbrains.micronaut.properties
 
 import com.intellij.codeInspection.LocalQuickFix
 import com.intellij.codeInspection.LocalQuickFixProvider
@@ -53,7 +37,8 @@ class PlaceholderPropertyReference private constructor(
         val module = ModuleUtilCore.findModuleForPsiElement(element)
 
         if (module != null) {
-            val directories = getConfigDirectories(module)
+            val directories =
+                getConfigDirectories(module)
             for (directory in directories) {
                 val files = directory.files
                 for (file in files) {
@@ -86,7 +71,10 @@ class PlaceholderPropertyReference private constructor(
         private fun getConfigDirectories(module: Module): Set<PsiDirectory> {
             val configs = HashSet<PsiDirectory>()
 
-            collectConfigDirectories(module, configs)
+            collectConfigDirectories(
+                module,
+                configs
+            )
 
             return configs
         }
@@ -119,7 +107,11 @@ class PlaceholderPropertyReference private constructor(
             }
 
             for (dependentModule in moduleRootManager.dependencies) {
-                collectConfigDirectories(dependentModule, configs, visitedModules)
+                collectConfigDirectories(
+                    dependentModule,
+                    configs,
+                    visitedModules
+                )
             }
         }
     }
