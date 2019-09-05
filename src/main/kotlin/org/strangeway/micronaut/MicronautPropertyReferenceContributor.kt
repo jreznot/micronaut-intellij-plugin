@@ -16,7 +16,6 @@
 
 package org.strangeway.micronaut
 
-import org.strangeway.micronaut.properties.PlaceholderTextRanges
 import com.intellij.openapi.util.TextRange
 import com.intellij.patterns.uast.injectionHostUExpression
 import com.intellij.psi.*
@@ -24,6 +23,7 @@ import com.intellij.util.SmartList
 import gnu.trove.THashMap
 import org.strangeway.micronaut.properties.PlaceholderInfo
 import org.strangeway.micronaut.properties.PlaceholderPropertyReference
+import org.strangeway.micronaut.properties.PlaceholderTextRanges
 import java.util.Collections.singletonMap
 
 // Example #6: Reference to property definition from String literal
@@ -80,9 +80,8 @@ class MicronautPropertyReferenceContributor : PsiReferenceContributor() {
     }
 
     private fun getFullTextRange(element: PsiElement): Map<TextRange, PlaceholderInfo> {
-        val textRange = TextRange(1, element.text.length - 1)
-        val text = element.text
-        val placeholderText = textRange.substring(text)
-        return singletonMap(textRange, PlaceholderInfo(placeholderText))
+        val text = ElementManipulators.getValueText(element)
+        val textRange = ElementManipulators.getValueTextRange(element)
+        return singletonMap(textRange, PlaceholderInfo(text))
     }
 }
