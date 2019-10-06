@@ -4,9 +4,11 @@
 
 IntelliJ IDEA Plugin DevKit Showcase for [Joker 2019 Conference Talk](https://jokerconf.com/en/2019/talks/73qcxovh8oso2wj5h4cssq/).
 
+<h1 align="center">
 <a href="https://jokerconf.com/en/2019/talks/73qcxovh8oso2wj5h4cssq/">
-<img src="https://github.com/jreznot/micronaut-intellij-plugin/blob/master/img/joker-2019-cover.png" alt="Joker 2019" width="600" align="center">
+<img src="https://github.com/jreznot/micronaut-intellij-plugin/blob/master/img/joker-2019-cover.png" alt="Joker 2019" width="513" align="center">
 </a>
+</h1>
 
 Here you can find the following examples:
 
