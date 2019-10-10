@@ -21,16 +21,15 @@ import com.intellij.psi.PsiType
 import org.jetbrains.uast.UExpression
 import org.jetbrains.uast.getUCallExpression
 
-class PublishEventPoint(private val myExpression: UExpression) {
+class PublishEventPoint(private val expr: UExpression) {
     val eventType: PsiType?
         get() {
-            return myExpression.getExpressionType()
+            return expr.getExpressionType()
         }
 
     val element: PsiElement?
         get() {
-            val callExpression = myExpression.uastParent.getUCallExpression() ?: return myExpression.sourcePsi
-            val sourcePsi = callExpression.sourcePsi ?: return myExpression.sourcePsi
-            return sourcePsi
+            val callExpression = expr.uastParent.getUCallExpression() ?: return expr.sourcePsi
+            return callExpression.sourcePsi ?: return expr.sourcePsi
         }
 }
