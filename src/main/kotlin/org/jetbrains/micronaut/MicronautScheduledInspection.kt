@@ -30,9 +30,10 @@ class MicronautScheduledInspection : AbstractBaseJavaLocalInspectionTool() {
             val source = value?.sourceElement
             if (source != null) {
                 val cronValue = value.constantValue as String
-                if (!isValidCronExpression(cronValue)) {
+                val error = validateCronExpression(cronValue)
+                if (error != null) {
                     problemsHolder.registerProblem(
-                        source, "Incorrect CRON expression", ProblemHighlightType.GENERIC_ERROR
+                        source, "Incorrect CRON expression: $error", ProblemHighlightType.GENERIC_ERROR
                     )
                 }
             }
@@ -55,16 +56,20 @@ class MicronautScheduledInspection : AbstractBaseJavaLocalInspectionTool() {
         return ProblemDescriptor.EMPTY_ARRAY
     }
 
-    private fun isValidCronExpression(cron: String): Boolean {
-        if (cron == "") return true
-
-        val cronParser = CronParser(instanceDefinitionFor(CronType.SPRING))
+    private fun validateCronExpression(cron: String): String? {
+        if (cron == "") return null
         try {
-            cronParser.parse(cron)
+            CronParser(instanceDefinitionFor(CronType.SPRING)).parse(cron)
+            return null
         } catch (iae: IllegalArgumentException) {
-            return false
+            // fallback to UNIX parser
+            try {
+                CronParser(instanceDefinitionFor(CronType.UNIX)).parse(cron)
+                return null
+            } catch (iae: IllegalArgumentException) { }
+
+            return iae.message
         }
-        return true
     }
 
     class AddAnnotationFix(private val fqn: String, psiClass : PsiClass) : LocalQuickFixOnPsiElement(psiClass) {
