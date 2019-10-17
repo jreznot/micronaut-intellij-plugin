@@ -18,7 +18,6 @@ Here you can find the following examples:
 - UAST Inspection
 - Line marker provider
 - Reference contributor
-- Language injection
 
 All the features are implemented for Micronaut Framework.
 
