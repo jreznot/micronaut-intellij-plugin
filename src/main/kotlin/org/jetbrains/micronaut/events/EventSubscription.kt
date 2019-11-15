@@ -16,21 +16,23 @@
 
 package org.jetbrains.micronaut.events
 
-import com.intellij.psi.PsiElementRef
+import com.intellij.psi.PsiAnchor
 import com.intellij.psi.PsiMethod
 import com.intellij.psi.PsiType
 
 class EventSubscription(method: PsiMethod) {
-    private val myRef: PsiElementRef<PsiMethod> = PsiElementRef.real(method)
+    private val myRef: PsiAnchor = PsiAnchor.create(method)
 
-    val method : PsiMethod? get() {
-        return myRef.psiElement
-    }
+    val method: PsiMethod?
+        get() {
+            return myRef.retrieve() as PsiMethod?
+        }
 
-    val eventType : PsiType? get() {
-        val method = myRef.psiElement ?: return null
-        if (method.parameterList.parametersCount != 1) return null
+    val eventType: PsiType?
+        get() {
+            val method = myRef.retrieve() as PsiMethod? ?: return null
+            if (method.parameterList.parametersCount != 1) return null
 
-        return method.parameterList.parameters[0].type
-    }
+            return method.parameterList.parameters[0].type
+        }
 }

@@ -16,20 +16,21 @@
 
 package org.jetbrains.micronaut.events
 
+import com.intellij.psi.PsiAnchor
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiType
 import org.jetbrains.uast.UExpression
 import org.jetbrains.uast.getUCallExpression
 
-class PublishEventPoint(private val expr: UExpression) {
-    val eventType: PsiType?
-        get() {
-            return expr.getExpressionType()
-        }
+class PublishEventPoint(expr: UExpression) {
+    val eventType: PsiType? = expr.getExpressionType()
 
-    val element: PsiElement?
-        get() {
-            val callExpression = expr.uastParent.getUCallExpression() ?: return expr.sourcePsi
-            return callExpression.sourcePsi ?: return expr.sourcePsi
-        }
+    private val elementRef: PsiAnchor? = findSourcePsi(expr)?.let { PsiAnchor.create(it) }
+
+    val element: PsiElement? = elementRef?.retrieve()
+}
+
+private fun findSourcePsi(expr: UExpression): PsiElement? {
+    val callExpression = expr.uastParent.getUCallExpression() ?: return expr.sourcePsi
+    return callExpression.sourcePsi ?: return expr.sourcePsi
 }
